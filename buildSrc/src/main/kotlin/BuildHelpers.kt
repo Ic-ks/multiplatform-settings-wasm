@@ -30,6 +30,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmWithJavaTargetPreset
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetPreset
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTarget
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTargetPreset
 import org.jetbrains.kotlin.konan.target.Architecture
@@ -66,6 +67,7 @@ private val KotlinTargetPreset<*>.isNativeTargetPreset: Boolean
 private val KotlinTarget.isJsTarget: Boolean
     get() = this is KotlinJsTarget || this is KotlinJsIrTarget
 
+@OptIn(ExperimentalWasmDsl::class)
 private fun KotlinMultiplatformExtension.buildAllTargets(targetPresets: NamedDomainObjectCollection<KotlinTargetPreset<*>>) {
     if (targetPresets.findByName("android") != null) {
         android {
@@ -75,6 +77,11 @@ private fun KotlinMultiplatformExtension.buildAllTargets(targetPresets: NamedDom
     if (targetPresets.findByName("js") != null) {
         // TODO include nodejs somehow?
         js {
+            browser()
+        }
+    }
+    if (targetPresets.findByName("wasm") != null) {
+        wasm {
             browser()
         }
     }

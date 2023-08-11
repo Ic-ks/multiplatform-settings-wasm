@@ -33,6 +33,7 @@ standardConfiguration(
     "iosSimulatorArm64",
     "iosX64",
     "js",
+    "wasm",
     "jvm",
     "macosArm64",
     "macosX64",

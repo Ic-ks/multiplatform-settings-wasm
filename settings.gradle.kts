@@ -27,6 +27,7 @@ pluginManagement {
         google()
         mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
+        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
 rootProject.name = "MultiplatformSettings"

@@ -16,6 +16,7 @@
 
 package com.russhwolf.settings
 
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.reinterpret
@@ -31,6 +32,7 @@ import platform.windows.WCHARVar
  * On Windows this uses registry entries in a subkey of [HKEY_CURRENT_USER\SOFTWARE][HKEY_CURRENT_USER]. It uses a key
  * based on the name returned by [GetModuleFileNameW], with the directory and extension removed.
  */
+@OptIn(ExperimentalForeignApi::class)
 @ExperimentalSettingsImplementation
 public actual fun Settings(): Settings {
     val name = memScoped {
@@ -38,7 +40,7 @@ public actual fun Settings(): Settings {
         GetModuleFileNameW(
             null,
             nameArray.reinterpret(),
-            MAX_PATH
+            MAX_PATH.toUInt()
         )
         nameArray.toKString().takeLastWhile { it != '\\' }.removeSuffix(".exe")
     }

@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    repositories {
-        google()
-        gradlePluginPortal()
-        mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
-    }
-}
+
+package com.russhwolf.settings
+
+/**
+ * Returns a default [Settings] instance.
+ *
+ * On JS, this delegates to [localStorage][kotlinx.browser.localStorage].
+ */
+public actual fun Settings(): Settings = StorageSettings()

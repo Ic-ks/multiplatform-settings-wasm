@@ -15,8 +15,8 @@
  */
 
 plugins {
-    kotlin("multiplatform") version "1.8.0" apply false
-    kotlin("android") version "1.8.0" apply false
+    kotlin("multiplatform") version "1.9.0" apply false
+    kotlin("android") version "1.9.0" apply false
     id("com.android.library") version "4.2.2" apply false
     id("com.android.application") version "4.2.2" apply false
 }
@@ -25,6 +25,7 @@ allprojects {
     ext["library_version"] = "1.0.0"
 
     repositories {
+        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
         mavenLocal()
         google()
         mavenCentral()
